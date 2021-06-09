@@ -16,7 +16,7 @@
       <Card v-for="person in people" :key="person.uuid" v-bind="person" />
     </div>
     <div class="functionButton-wrapper">
-      <!-- Mouse left / right function bind -->
+      <!-- Mouse left / right events -->
       <button
         v-on:click.left="mouseClickLeft"
         v-on:click.prevent.right="mouseClickRight"
