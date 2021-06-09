@@ -1,18 +1,29 @@
 <template>
-  <div class="cardsGrid">
-    <Card
-      v-for="person in people"
-      :key="person.uuid"
-      class="card"
-      :name="person.name"
-      :link="person.link"
-      :tweets="person.tweets"
-      :following="person.following"
-      :followers="person.followers"
-    />
+  <div class="CardsGrid">
+    <div class="cardsGrid-wrapper">
+      <Card
+        v-for="person in people"
+        :key="person.uuid"
+        class="card"
+        :name="person.name"
+        :link="person.link"
+        :tweets="person.tweets"
+        :following="person.following"
+        :followers="person.followers"
+      />
 
-    <!-- Bind solution -->
-    <Card v-for="person in people" :key="person.uuid" v-bind="person" />
+      <!-- Bind solution -->
+      <Card v-for="person in people" :key="person.uuid" v-bind="person" />
+    </div>
+    <div class="functionButton-wrapper">
+      <!-- Mouse left / right function bind -->
+      <button
+        v-on:click.left="mouseClickLeft"
+        v-on:click.prevent.right="mouseClickRight"
+      >
+        Change following
+      </button>
+    </div>
   </div>
 </template>
 
@@ -66,13 +77,25 @@ export default {
       ],
     };
   },
+  methods: {
+    mouseClickLeft() {
+      this.people.forEach((value) => {
+        value.following++;
+      });
+    },
+    mouseClickRight() {
+      this.people.forEach((value) => {
+        value.following--;
+      });
+    },
+  },
 };
 </script>
 
 <style scoped lang="scss">
 $gap: 12px;
 
-.cardsGrid {
+.cardsGrid-wrapper {
   width: 100%;
   display: flex;
   flex-flow: row wrap;
@@ -80,6 +103,14 @@ $gap: 12px;
 
   .card {
     flex: 0 1 calc(33% - 8px);
+  }
+}
+
+.functionButton-wrapper {
+  margin-top: 15px;
+  button {
+    height: 35px;
+    color: red;
   }
 }
 </style>
