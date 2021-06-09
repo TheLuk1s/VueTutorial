@@ -11,9 +11,9 @@
     </div>
 
     <!-- Popular wrapper -->
-    <div v-if="following > 1000" class="card-popular--wrapper">
+    <div v-if="followers > 1000" class="card-popular--wrapper">
       <!-- Badge -->
-      <span>Popular *</span>
+      <span :class="{ red: isRed }">Popular *</span>
     </div>
 
     <!-- Stats wrapper -->
@@ -57,17 +57,24 @@ export default {
       default: 0,
     },
   },
+  computed: {
+    isRed() {
+      return this.followers > 1000;
+    },
+  },
 };
 </script>
 
 <style scoped lang="scss">
 .card {
-  width: 300px;
+  width: 100%;
   background-color: #595FFF;
   display: block;
   border: 1px solid #000;
 }
-
+.red {
+  color: red;
+}
 .card-image--wrapper {
   padding: 20px 20px 10px 20px;
   img {

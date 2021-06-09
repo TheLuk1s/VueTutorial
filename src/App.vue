@@ -1,21 +1,16 @@
 <template>
   <div id="app">
-    <Card
-      name="vardas"
-      link="https://www.google.com/"
-      :tweets="3"
-      :following="1001"
-    />
+    <CardsGrid />
   </div>
 </template>
 
 <script>
-import Card from "./components/Card";
+import CardsGrid from "./components/CardsGrid";
 
 export default {
   name: "App",
   components: {
-    Card,
+    CardsGrid,
   },
 };
 </script>
