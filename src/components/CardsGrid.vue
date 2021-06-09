@@ -3,6 +3,8 @@
     <div class="cardsGrid-wrapper">
       <Card
         v-for="person in people"
+        v-on:click.left.native="mouseClickLeft(person)"
+        v-on:click.prevent.right.native="mouseClickRight(person)"
         :key="person.uuid"
         class="card"
         :name="person.name"
@@ -13,16 +15,13 @@
       />
 
       <!-- Bind solution -->
-      <Card v-for="person in people" :key="person.uuid" v-bind="person" />
-    </div>
-    <div class="functionButton-wrapper">
-      <!-- Mouse left / right events -->
-      <button
-        v-on:click.left="mouseClickLeft"
-        v-on:click.prevent.right="mouseClickRight"
-      >
-        Change following
-      </button>
+      <Card
+        v-for="person in people"
+        v-on:click.left.native="mouseClickLeft(person)"
+        v-on:click.prevent.right.native="mouseClickRight(person)"
+        :key="person.uuid"
+        v-bind="person"
+      />
     </div>
   </div>
 </template>
@@ -78,15 +77,11 @@ export default {
     };
   },
   methods: {
-    mouseClickLeft() {
-      this.people.forEach((value) => {
-        value.following++;
-      });
+    mouseClickLeft(person) {
+      person.following++;
     },
-    mouseClickRight() {
-      this.people.forEach((value) => {
-        value.following--;
-      });
+    mouseClickRight(person) {
+      person.following--;
     },
   },
 };
