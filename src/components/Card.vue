@@ -2,12 +2,18 @@
   <div class="card">
     <!-- Image wrapper -->
     <div class="card-image--wrapper">
-      <img class="card-image" src="https://picsum.photos/200">
+      <img class="card-image" src="https://picsum.photos/200" />
     </div>
 
     <!-- Name wrapper -->
     <div class="card-name--wrapper">
       <a :href="link">{{ name }}</a>
+    </div>
+
+    <!-- Popular wrapper -->
+    <div v-if="following > 1000" class="card-popular--wrapper">
+      <!-- Badge -->
+      <span>Popular *</span>
     </div>
 
     <!-- Stats wrapper -->
@@ -23,7 +29,6 @@
         <div class="flex-item">{{ followers }}</div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -33,64 +38,68 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     link: {
       type: String,
-      required: true
+      required: true,
     },
     tweets: {
-        type: Number,
-        default: 0
+      type: Number,
+      default: 0,
     },
     following: {
-        type: Number,
-        default: 0
+      type: Number,
+      default: 0,
     },
     followers: {
-        type: Number,
-        default: 0
+      type: Number,
+      default: 0,
     },
-  }
+  },
 };
 </script>
 
 <style scoped lang="scss">
-  .card {
-    width: 300px;
-    background-color: #595FFF;
-    display: block;
+.card {
+  width: 300px;
+  background-color: #595FFF;
+  display: block;
+  border: 1px solid #000;
+}
+
+.card-image--wrapper {
+  padding: 20px 20px 10px 20px;
+  img {
+    width: 100%;
     border: 1px solid #000;
   }
+}
 
-  .card-image--wrapper {
-    padding: 20px 20px 10px 20px;
-    img {
-      width: 100%;
-      border: 1px solid #000;
-    }
+.card-name--wrapper {
+  a {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
   }
-  
-  .card-name--wrapper {
-      a {
-        text-transform: uppercase;
-        text-decoration: none;
-        color: #fff;
-      }
-  }
+}
 
-  .card-numbers--wrapper {
-      margin-top: 15px;
-      margin-bottom: 20px; 
-  }
+.card-numbers--wrapper {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
 
-  .row{
-    display: flex;
-    flex-flow: row wrap;
-    
-    .flex-item {
-      color: #000;
-      flex: 0 1 33%;
-    }
+.card-popular--wrapper {
+  margin-top: 5px;
+}
+
+.row {
+  display: flex;
+  flex-flow: row wrap;
+
+  .flex-item {
+    color: #000;
+    flex: 0 1 33%;
   }
+}
 </style>

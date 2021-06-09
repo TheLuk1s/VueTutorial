@@ -1,18 +1,22 @@
 <template>
   <div id="app">
-    <Card name="vardas" link="https://www.google.com/" :tweets="3" />
+    <Card
+      name="vardas"
+      link="https://www.google.com/"
+      :tweets="3"
+      :following="1001"
+    />
   </div>
 </template>
 
 <script>
-/*import HelloWorld from "./components/HelloWorld";*/
 import Card from "./components/Card";
 
 export default {
   name: "App",
   components: {
-    Card
-  }
+    Card,
+  },
 };
 </script>
 
