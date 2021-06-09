@@ -1,5 +1,12 @@
 <template>
   <div class="CardsGrid">
+    <!-- Functional buttons wrapper -->
+    <div class="functionalButtons-wrapper">
+      <button v-on:click="sortUsers">Sort</button>
+      <button v-on:click="clearUsers">Clear</button>
+    </div>
+
+    <!-- Cards grid wrapper -->
     <div class="cardsGrid-wrapper">
       <Card
         v-for="person in people"
@@ -15,6 +22,7 @@
       />
 
       <!-- Bind solution -->
+      <!--
       <Card
         v-for="person in people"
         v-on:click.left.native="mouseClickLeft(person)"
@@ -22,6 +30,13 @@
         :key="person.uuid"
         v-bind="person"
       />
+      -->
+    </div>
+
+    <!-- Information box wrapper -->
+    <div class="informationBox-wrapper">
+      <h2>Total tweets: {{ getAllTweets() }}</h2>
+      <h2>Total unique users: {{ getAllUsers() }}</h2>
     </div>
   </div>
 </template>
@@ -83,12 +98,39 @@ export default {
     mouseClickRight(person) {
       person.following--;
     },
+
+    getAllTweets() {
+      var totalTweets = 0;
+      if (typeof this.people.length !== "undefined") {
+        this.people.forEach((vals) => {
+          totalTweets += vals.tweets;
+        });
+      }
+
+      return totalTweets;
+    },
+
+    getAllUsers() {
+      return this.people.length ? this.people.length : 0;
+    },
+
+    sortUsers() {
+      this.people.sort((a, b) => a.tweets - b.tweets);
+    },
+
+    clearUsers() {
+      this.people = {};
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
 $gap: 12px;
+
+.CardsGrid {
+  width: 100%;
+}
 
 .cardsGrid-wrapper {
   width: 100%;
@@ -107,5 +149,21 @@ $gap: 12px;
     height: 35px;
     color: red;
   }
+}
+
+.functionalButtons-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 0 2px;
+}
+
+.informationBox-wrapper {
+  width: 100%;
+  background-color: grey;
+  min-height: 20px;
+  margin-top: 10px;
+  border: 1px solid #000;
+  color: #000;
 }
 </style>

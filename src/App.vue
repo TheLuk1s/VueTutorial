@@ -24,5 +24,6 @@ export default {
   color: #2c3e50;
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 </style>
