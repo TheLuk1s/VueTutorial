@@ -29,6 +29,11 @@
         <div class="flex-item">{{ followers }}</div>
       </div>
     </div>
+
+    <!-- Remove button -->
+    <div class="removeButton--wrapper">
+      <button>Remove</button>
+    </div>
   </div>
 </template>
 
@@ -75,6 +80,11 @@ export default {
 .red {
   color: red;
 }
+
+.removeButton--wrapper {
+  margin-bottom: 20px;
+}
+
 .card-image--wrapper {
   padding: 20px 20px 10px 20px;
   img {

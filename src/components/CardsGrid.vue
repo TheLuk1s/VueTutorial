@@ -10,8 +10,6 @@
     <div class="cardsGrid-wrapper">
       <Card
         v-for="person in people"
-        v-on:click.left.native="mouseClickLeft(person)"
-        v-on:click.prevent.right.native="mouseClickRight(person)"
         :key="person.uuid"
         class="card"
         :name="person.name"
@@ -35,8 +33,8 @@
 
     <!-- Information box wrapper -->
     <div class="informationBox-wrapper">
-      <h2>Total tweets: {{ getAllTweets() }}</h2>
-      <h2>Total unique users: {{ getAllUsers() }}</h2>
+      <h2>Total tweets: {{ getAllTweets }}</h2>
+      <h2>Total unique users: {{ getAllUsers }}</h2>
     </div>
   </div>
 </template>
@@ -91,16 +89,10 @@ export default {
       ],
     };
   },
-  methods: {
-    mouseClickLeft(person) {
-      person.following++;
-    },
-    mouseClickRight(person) {
-      person.following--;
-    },
-
+  computed: {
     getAllTweets() {
-      var totalTweets = 0;
+      let totalTweets = 0;
+
       if (typeof this.people.length !== "undefined") {
         this.people.forEach((vals) => {
           totalTweets += vals.tweets;
@@ -112,6 +104,14 @@ export default {
 
     getAllUsers() {
       return this.people.length ? this.people.length : 0;
+    },
+  },
+  methods: {
+    mouseClickLeft(person) {
+      person.following++;
+    },
+    mouseClickRight(person) {
+      person.following--;
     },
 
     sortUsers() {
